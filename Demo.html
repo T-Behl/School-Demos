@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+<ul id="Store-List"></ul>
+<script>
+//create constructor for items
+class Item {
+    constructor(name, Iprice) {
+        this.name = name;
+        this.price = Iprice
+    }
+}
+//create contructor to store items into an array to be called
+class ListItems {
+    constructor(){
+        this.itemList = []
+    }
+    
+    newItem(name, description, Iprice, sale){
+        let i = new Item(name, description, Iprice, sale)
+        this.itemList.push(i)
+        return i
+    }
+    get TotalItems(){
+      return this.itemList.length
+  }
+}
+//create array name to call for any need
+let store = new ListItems()
+//create item into store array
+let TankTop = store.newItem("Tank Top Shirt", 30)
+
+//get elements from html 
+const StoreListing = document.getElementById("Store-List")
+
+//create a list and text format for all items in store
+for (let i = 0; i < store.itemList.length; i++) {
+    //declare constant for creating an li element to clean up code
+    const ListItem = document.createElement("li");
+    //delcare what item is showed to select later on easier
+    const Item = store.itemList[i]
+    
+    //formating text and appending items not on sale
+    let text = ""
+    text += Item.name
+    text += "<br> $"+ Item.price 
+    ListItem.innerHTML = text ;
+    StoreListing.appendChild(ListItem);
+}
+</script>
+</body>
+</html>
