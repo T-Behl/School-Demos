@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>DemoClasses</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <ul id="Store-List"></ul>
+    <p id="Describing"></p>
+    <script>
+        //create constructor for items
+        class Item {
+            constructor(name, price) {
+                this.name = name;
+                this.price = price;
+                this.store = "Walmart";
+            }
+            //create method to describe item
+            describe(){
+                return this.name + " is $" + this.price + " at " + this.store + "."
+        }
+        //create contructor to store items into an array to be called
+        class ListItems {
+            constructor(){
+                this.itemList = []
+        }
+            //create method to add new item instance
+            newItem(name, price){
+                let i = new Item(name, price)
+                this.itemList.push(i)
+                //allow direct reference to created item with the variable name
+                return i
+            }
+        }
+        //create array name to call on
+        let store = new ListItems()
+        //create item into store array
+        let TankTop = store.newItem("Tank Top Shirt", 30)
+        let Boots = store.newItem("Boots",50)
+
+        //get elements from html 
+        const StoreListing = document.getElementById("Store-List")
+        const Describing = document.getElementByID("Describing")
+//create a list and text format for all items in store
+for (let i = 0; i < store.itemList.length; i++) {
+    //declare constant for creating an li element to clean up code
+    const ListItem = document.createElement("li");
+    //delcare what item is showed to select later on easier
+    const Item = store.itemList[i]
+    
+    //formating text and appending items not on sale
+    let text = "Name:" + Item.name + " Price: $"+ Item.price 
+    ListItem.innerHTML = text ;
+    StoreListing.appendChild(ListItem);
+}
+        //include a description for Boots item
+        Describing.innerHTML = Boots.describe()
+</script>
+</body>
+</html>
+
